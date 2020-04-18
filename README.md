@@ -13,3 +13,5 @@ And there is always a Browse option. If above location is set then the browse st
 
 # Installation in kodi:
 See https://peno64.github.io/ and install service.subtitles.localsubtitle*.zip
+
+<a href="service.subtitles.localsubtitle_1_2_0.zip">service.subtitles.localsubtitle_1_2_0.zip</a>
