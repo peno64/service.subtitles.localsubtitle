@@ -10,13 +10,9 @@
     </extension>
     <extension point="xbmc.addon.metadata">
         <summary lang="en">LocalSubtitle</summary>
-        <description>kodi addon to add a local subtitle to a video>
+        <description lang="en">kodi addon to add a local subtitle to a video</description>
         <disclaimer></disclaimer>
         <platform>all</platform>
-        <assets>
-            <icon>icon.png</icon>
-            <fanart>fanart.jpg</fanart>
-        </assets>
     </extension>
 </addon>
 </addons>
