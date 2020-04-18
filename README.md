@@ -12,4 +12,4 @@ subtitle.srt is fixed. If the location is not defined or subtitle.srt is not fou
 And there is always a Browse option. If above location is set then the browse starts in this folder. Else at top level.
 
 # Installation in kodi:
-See https://peno64.github.io/ and install script.RealDebrid.vpn*.zip
+See https://peno64.github.io/ and install service.subtitles.localsubtitle*.zip
