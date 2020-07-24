@@ -12,4 +12,4 @@ subtitle.srt is fixed. If the location is not defined or subtitle.srt is not fou
 And there is always a Browse option. If above location is set then the browse starts in this folder. Else at top level.
 
 # Installation in kodi:
-See https://peno64.github.io/ and install <a href="service.subtitles.localsubtitle_1_2_0.zip">service.subtitles.localsubtitle_1_2_0.zip</a>
+See https://peno64.github.io/
