@@ -1,6 +1,6 @@
-# LocalSubtitle
+# service.subtitles.localsubtitle
 
-kodi addon to add a local subtitle to a video
+kodi addon to add a local subtitle to a video and since version 1.6.0 also dual subtitles.
 
 This addon is a kodi subtitle addon to apply a local subtitle to the current playing video.
 Kodi has its own possibility to load a local subtitle (via Browse for subtitle...) but that sometimes does not work (hanging) and that is why this addon was created.
@@ -12,4 +12,4 @@ subtitle.srt is fixed. If the location is not defined or subtitle.srt is not fou
 And there is always a Browse option. If above location is set then the browse starts in this folder. Else at top level.
 
 # Installation in kodi:
-See https://peno64.github.io/
+Via repository https://peno64.github.io/repository.peno64/
