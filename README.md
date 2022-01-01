@@ -10,6 +10,9 @@ If a location of subtitles is defined in kodi, Settings, Player, Language, Custo
 On Raspberry Pi, a possible place is /storage/videos because that is a share that can be accessed by any computer in the network but any folder accessable by kodi will do.
 subtitle.srt is fixed. If the location is not defined or subtitle.srt is not found then subtitle.srt will not be proposed.
 And there is always a Browse option. If above location is set then the browse starts in this folder. Else at top level.
+The following subtitle extensions are allowed: .srt, .sub, .ssa, .ass, .idx, .smi, .aqt, .scc, .jss, .ogm, .pjs, .rt, .smi
+However if dual subtitles are chosen then only .srt subtitle files are allowed.
+Since version 1.7.0 also a zip file with a subtitle is allowed. Both for single and dual subtitles.
 
 # Installation in kodi:
 Via repository https://peno64.github.io/repository.peno64/
