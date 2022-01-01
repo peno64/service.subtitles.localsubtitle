@@ -38,6 +38,10 @@ msgctxt "#33006"
 msgid "Choose Top Subtitle File"
 msgstr ""
 
+msgctxt "#33007"
+msgid "zip file does not contain a subtitle file"
+msgstr ""
+
 msgctxt "#32005"
 msgid "Dual Subtitles Styles"
 msgstr ""

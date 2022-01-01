@@ -29,6 +29,7 @@ __scriptid__   = __addon__.getAddonInfo('id')
 __scriptname__ = __addon__.getAddonInfo('name')
 __version__    = __addon__.getAddonInfo('version')
 __language__   = __addon__.getLocalizedString
+__exts__       = [ ".srt", ".sub", ".ssa", ".ass", ".idx", ".smi", ".aqt", ".scc", ".jss", ".ogm", ".pjs", ".rt", ".smi" ]
 
 try:
     translatePath = xbmcvfs.translatePath
@@ -226,6 +227,17 @@ def merge(file):
     subs[0].save(ass,format_='ass')
     return ass
 
+def unzip(zip, exts):
+  xbmc.executebuiltin('Extract("%s","%s")' % (zip,__temp__,), True)
+
+  for file in xbmcvfs.listdir(zip)[1]:
+    file = os.path.join(__temp__, file)
+    if (os.path.splitext( file )[1] in exts):
+      return file
+
+  xbmc.executebuiltin((u'Notification(%s,%s)' % (__scriptname__ , __language__(33007))))
+  return ''
+
 def Download(filename):
   listitem = xbmcgui.ListItem(label=filename)
   xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=filename,listitem=listitem,isFolder=False)
@@ -242,23 +254,40 @@ elif params['action'] == 'download':
     Download(__subtitle__)
 
 elif params['action'] == 'browse':
-  subtitlefile = xbmcgui.Dialog().browse(1, __language__(33003), "video", ".srt|.sub|.ssa|.ass|.idx|.smi|.aqt|.scc|.jss|.ogm|.pjs|.rt|.smi", False, False, __subtitlepath__, False)
+  exts = ''
+  for ext in __exts__:
+    exts = exts + '|' + ext
+  exts = exts[1:]
+  subtitlefile = xbmcgui.Dialog().browse(1, __language__(33003), "video", ".zip|" + exts, False, False, __subtitlepath__, False)
   if subtitlefile != __subtitlepath__:
-    Download(subtitlefile)
+    if subtitlefile.endswith('.zip'):
+      subtitlefile = unzip(subtitlefile, __exts__)
+    if subtitlefile != '':
+      Download(subtitlefile)
 
 elif params['action'] == 'browsedual':
-  subtitlefile1 = xbmcgui.Dialog().browse(1, __language__(33005), "video", ".srt", False, False, __subtitlepath__, False)
+  subtitlefile1 = xbmcgui.Dialog().browse(1, __language__(33005), "video", ".zip|.srt", False, False, __subtitlepath__, False)
   if subtitlefile1 != __subtitlepath__:
-    subs=[]
-    subs.append(subtitlefile1)
+    if subtitlefile1.endswith('.zip'):
+      subtitlefile1 = unzip(subtitlefile1, [ ".srt" ])
 
-    subtitlefile2 = xbmcgui.Dialog().browse(1, __language__(33006), "video", ".srt", False, False, __subtitlepath__, False)
-    if subtitlefile2 == __subtitlepath__ or subtitlefile2 == None:
-      subtitlefile2 = ""
-    else:
-      subs.append(subtitlefile2)
+    if subtitlefile1 != '':
+      subs=[]
+      subs.append(subtitlefile1)
 
-    finalfile = merge(subs)
-    Download(finalfile)
+      subtitlefile2 = xbmcgui.Dialog().browse(1, __language__(33006), "video", ".zip|.srt", False, False, __subtitlepath__, False)
+      if subtitlefile2 == __subtitlepath__ or subtitlefile2 == None:
+        subtitlefile2 = ""
+      else:
+        if subtitlefile2.endswith('.zip'):
+          subtitlefile2 = unzip(subtitlefile2, [ ".srt" ])
+        if subtitlefile2 == '':
+          subtitlefile1 = ''
+        else:
+          subs.append(subtitlefile2)
+
+      if subtitlefile1 != '':
+        finalfile = merge(subs)
+        Download(finalfile)
 
 xbmcplugin.endOfDirectory(int(sys.argv[1]))
