@@ -16,93 +16,78 @@ msgstr ""
 
 msgctxt "#33001"
 msgid "Manual search not supported"
-msgstr ""
 
 msgctxt "#33002"
 msgid "Browse Single Subtitle..."
-msgstr ""
 
 msgctxt "#33003"
 msgid "Choose Subtitle File"
-msgstr ""
 
 msgctxt "#33004"
 msgid "Browse Dual Subtitles..."
-msgstr ""
 
 msgctxt "#33005"
 msgid "Choose Bottom Subtitle File"
-msgstr ""
 
 msgctxt "#33006"
 msgid "Choose Top Subtitle File"
-msgstr ""
 
 msgctxt "#33007"
 msgid "Zip file does not contain a supported subtitle file"
-msgstr ""
 
 msgctxt "#32005"
 msgid "Dual Subtitles Styles"
-msgstr ""
 
 msgctxt "#32006"
 msgid "Top Subtitle"
-msgstr ""
 
 msgctxt "#32007"
 msgid "Font"
-msgstr ""
 
 msgctxt "#32008"
 msgid "Font Size"
-msgstr ""
 
 msgctxt "#32009"
 msgid "Font Bold"
-msgstr ""
 
 msgctxt "#32010"
 msgid "Color"
-msgstr ""
 
 msgctxt "#32011"
 msgid "Black Translusent Background"
-msgstr ""
 
 msgctxt "#32012"
 msgid "White"
-msgstr ""
 
 msgctxt "#32013"
 msgid "Yellow"
-msgstr ""
 
 msgctxt "#32016"
 msgid "Bottom Subtitle"
-msgstr ""
 
 msgctxt "#32020"
 msgid "Auto Shift"
-msgstr "Auto Shift"
 
 msgctxt "#32021"
 msgid "Time Difference Threshold (milliseconds)"
-msgstr "Time Difference Threshold (milliseconds)"
 
 msgctxt "#32022"
 msgid "Enabling Auto Shift will try to sync the second subtitle with the first\naccording to the Time Difference Threshold"
-msgstr "Enabling Auto Shift will try to sync the second subtitle with the first\naccording to the Time Difference Threshold"
 
 msgctxt "#32023"
 msgid "The depth of the text shadow, in pixels"
-msgstr "The depth of the text shadow, in pixels"
 
 msgctxt "#32024"
 msgid "The width of the text outline, in pixels"
-msgstr "The width of the text outline, in pixels"
-msgctxt "#32005"
 
 msgctxt "#32025"
 msgid "These options only apply if Browse Dual Subtitles is chosen.\nNot for a single subtitle in which case standard Kodi settings are used."
-msgstr ""
+
+msgctxt "#32026"
+msgid "Minimal Time (milliseconds) Subtitles On Screen"
+
+msgctxt "#32027"
+msgid "When this time is set, all subtitles are extended to stay on screen\nfor at least this time."
+
+msgctxt "#32028"
+msgid "However if a next subtitle occurs earlier this time is of course cut off.\nThis allows people that read slower to read the text."

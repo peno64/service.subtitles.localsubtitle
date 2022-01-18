@@ -3,7 +3,11 @@
     <category label="32005" >
         <setting label="32025" type="text" enable="false"/>
     	<setting type="lsep"/>
-	<setting id="autoShft" label="32020" type="bool" default="true"/>
+	<setting id="minTime" label="32026" type="number" default="0" subsetting="true"/>
+        <setting label="32027" type="text" enable="false"/>
+        <setting label="32028" type="text" enable="false"/>
+    	<setting type="lsep"/>
+        <setting id="autoShft" label="32020" type="bool" default="true"/>
 	<setting id="autoShftAmt" label="32021" type="number" default="500" subsetting="true" enable="eq(-1,true)"/>
         <setting label="32022" type="text" enable="false"/>
     	<setting label="32006" type="lsep"/>

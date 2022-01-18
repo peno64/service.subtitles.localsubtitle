@@ -120,6 +120,17 @@ def charset_detect(filename):
         encoding = 'gbk'
     return encoding
 
+def setminTime(minTime, prevIndex, subs, line1):
+    if minTime > 0 and prevIndex >= 0:
+      line0 = subs[0][prevIndex]
+      l = line0.end - line0.start
+      if l < minTime:
+        l = minTime
+        if not line1 is None and line0.start + l > line1.start:
+          l = line1.start - line0.start - 50
+        line0.end = line0.start + l
+    return len(subs[0])
+
 def merge(file):
     subs=[]
     subs.append(pysubs2.SSAFile.from_string('', 'srt'))
@@ -127,13 +138,17 @@ def merge(file):
       subs.append(pysubs2.load(sub, encoding=charset_detect(sub)))
     ass = os.path.join(__temp__, "%s.ass" %(str(uuid.uuid4())))
 
+    if not p2:
+      myunicode = str
+    else:
+      myunicode = unicode
     top_style = pysubs2.SSAStyle()
     bottom_style=top_style.copy()
     top_style.alignment = 8
     top_style.fontsize = int(__addon__.getSetting('top_fontsize'))
     if(__addon__.getSetting('top_bold') == 'true'):
       top_style.bold = 1
-    top_style.fontname = unicode(__addon__.getSetting('top_font'))
+    top_style.fontname = myunicode(__addon__.getSetting('top_font'))
     if (__addon__.getSetting('top_color') == 'Yellow'):
       top_style.primarycolor = pysubs2.Color(255, 255, 0, 0)
     elif (__addon__.getSetting('top_color') == 'White'):
@@ -150,7 +165,7 @@ def merge(file):
     bottom_style.fontsize= int(__addon__.getSetting('bottom_fontsize'))
     if (__addon__.getSetting('bottom_bold') =='true'):
       bottom_style.bold = 1
-    bottom_style.fontname = unicode(__addon__.getSetting('bottom_font'))
+    bottom_style.fontname = myunicode(__addon__.getSetting('bottom_font'))
     if (__addon__.getSetting('bottom_color') == 'Yellow'):
       bottom_style.primarycolor=pysubs2.Color(255, 255, 0, 0)
     elif (__addon__.getSetting('bottom_color') == 'White'):
@@ -179,10 +194,14 @@ def merge(file):
     prevStart1 = -1
     prevEnd1 = 999999
     prevIndex2 = -1
+    prevIndexBottom = -1
+    prevIndexTop = -1
+    minTime = int(__addon__.getSetting('minTime'))
     while i < l1 or j < l2:
       if i < l1:
         line1 = subs[1][i]
         line1.style = u'bottom-style'
+        prevIndexBottom = setminTime(minTime, prevIndexBottom, subs, line1)
         subs[0].append(line1)
 
       if timeThresh < 0:
@@ -190,6 +209,7 @@ def merge(file):
         if j < l2:
           line2 = subs[2][j]
           line2.style = u'top-style'
+          prevIndexTop = setminTime(minTime, prevIndexTop, subs, line2)
           subs[0].append(line2)
       else:
         while j < l2:
@@ -212,6 +232,7 @@ def merge(file):
             elif line2.start <= prevEnd1:
               subs[0][prevIndex2].end = line2.start - 10
           prevIndex2 = len(subs[0])
+          prevIndexTop = setminTime(minTime, prevIndexTop, subs, line2)
           subs[0].append(line2)
           j = j + 1
 
@@ -223,6 +244,9 @@ def merge(file):
           prevEnd1 = 999999
 
       i = i + 1
+
+    setminTime(minTime, prevIndexBottom, subs, None)
+    setminTime(minTime, prevIndexTop, subs, None)
 
     subs[0].save(ass,format_='ass')
     return ass
