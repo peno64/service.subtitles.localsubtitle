@@ -91,3 +91,6 @@ msgid "When this time is set, all subtitles are extended to stay on screen\nfor 
 
 msgctxt "#32028"
 msgid "However if a next subtitle occurs earlier this time is of course cut off.\nThis allows people that read slower to read the text."
+
+msgctxt "#32029"
+msgid "Swap Bottom - Top subtitles"

@@ -142,6 +142,7 @@ def merge(file):
       myunicode = str
     else:
       myunicode = unicode
+
     top_style = pysubs2.SSAStyle()
     bottom_style=top_style.copy()
     top_style.alignment = 8
@@ -177,8 +178,12 @@ def merge(file):
     bottom_style.shadow = int(__addon__.getSetting('bottom_shadow'))
     bottom_style.outline = int(__addon__.getSetting('bottom_outline'))
 
-    subs[0].styles['top-style'] = top_style
-    subs[0].styles['bottom-style'] = bottom_style
+    if __addon__.getSetting('dualsub_swap') == 'true':
+      subs[0].styles['top-style'] = bottom_style
+      subs[0].styles['bottom-style'] = top_style
+    else:
+      subs[0].styles['top-style'] = top_style
+      subs[0].styles['bottom-style'] = bottom_style
 
     if __addon__.getSetting('autoShft') == 'true':
       timeThresh = int(__addon__.getSetting('autoShftAmt'))
@@ -298,7 +303,11 @@ elif params['action'] == 'browse':
 
 elif params['action'] == 'browsedual':
   while True:
-    subtitlefile1 = xbmcgui.Dialog().browse(1, __language__(33005), "video", ".zip|.srt", False, False, __subtitlepath__, False)
+    if __addon__.getSetting('dualsub_swap') == 'true':
+      title = __language__(33006)
+    else:
+      title = __language__(33005)
+    subtitlefile1 = xbmcgui.Dialog().browse(1, title, "video", ".zip|.srt", False, False, __subtitlepath__, False)
     if subtitlefile1 != __subtitlepath__:
       if subtitlefile1.endswith('.zip'):
         subtitlefile1 = unzip(subtitlefile1, [ ".srt" ])
@@ -310,7 +319,11 @@ elif params['action'] == 'browsedual':
     subs.append(subtitlefile1)
 
     while True:
-      subtitlefile2 = xbmcgui.Dialog().browse(1, __language__(33006), "video", ".zip|.srt", False, False, __subtitlepath__, False)
+      if __addon__.getSetting('dualsub_swap') == 'true':
+        title = __language__(33005)
+      else:
+        title = __language__(33006)
+      subtitlefile2 = xbmcgui.Dialog().browse(1, title, "video", ".zip|.srt", False, False, __subtitlepath__, False)
       if subtitlefile2 == __subtitlepath__:
         break
       else:

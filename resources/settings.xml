@@ -3,6 +3,8 @@
     <category label="32005" >
         <setting label="32025" type="text" enable="false"/>
     	<setting type="lsep"/>
+        <setting label="32029" type="bool" subsetting="true" id="dualsub_swap" default="false"/>
+    	<setting type="lsep"/>
 	<setting id="minTime" label="32026" type="number" default="0" subsetting="true"/>
         <setting label="32027" type="text" enable="false"/>
         <setting label="32028" type="text" enable="false"/>
