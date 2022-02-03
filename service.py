@@ -131,13 +131,12 @@ def charset_detect(filename, bottom):
     if encoding == 'Auto':
       with open(filename,'rb') as fi:
           rawdata = fi.read()
+      # see https://chardet.readthedocs.io/en/latest/supported-encodings.html
       encoding = chardet.detect(rawdata)['encoding']
       if encoding.lower() == 'gb2312':  # Decoding may fail using GB2312
           encoding = 'gbk'
-
-      #encoding='iso-8859-9'
-      #encoding='windows-1254'
     else:
+      # see https://docs.python.org/3/library/codecs.html
       choices = {'Arabic (ISO)': 'iso-8859-6', 'Arabic (Windows)': 'windows-1256', 'Baltic (ISO)': 'iso-8859-13', 'Baltic (Windows)': 'windows-1257', 'Central Europe (ISO)': 'iso-8859-2', 'Central Europe (Windows)': 'windows-1250', 'Chinese Simplified': 'gb2312', 'Chinese Traditional (Big5)': 'cp950', 'Cyrillic (ISO)': 'iso-8859-5', 'Cyrillic (Windows)': 'windows-1251', 'Greek (ISO)': 'iso-8859-7', 'Greek (Windows)': 'windows-1253', 'Hebrew (ISO)': 'iso-8859-8', 'Hebrew (Windows)': 'windows-1255', 'Hong Kong (Big5-HKSCS)': 'big5-hkscs', 'Japanese (Shift-JIS)': 'csshiftjis', 'Korean': 'iso2022_kr', 'Nordic Languages (ISO)': 'iso-8859-10', 'South Europe (ISO)': 'ISO-8859-3', 'Thai (ISO)': 'iso-8859-11', 'Thai (Windows)': 'cp874', 'Turkish (ISO)': 'iso-8859-9', 'Turkish (Windows)': 'windows-1254', 'Vietnamese (Windows)': 'windows-1258', 'Western Europe (ISO)': 'iso-8859-15', 'Western Europe (Windows)': 'windows-1252'}
       encoding = choices.get(encoding, 'default')
 
