@@ -70,6 +70,15 @@ if __subtitlepath__ != "":
 
 sys.path.append (__resource__)
 
+# Make sure the manual search button is disabled
+try:
+  if xbmc.getCondVisibility("Window.IsActive(subtitlesearch)"):
+      window = xbmcgui.Window(10153)
+      window.getControl(160).setEnableCondition('!String.IsEqual(Control.GetLabel(100),"{}")'.format(__scriptname__))
+except:
+  #ignore
+  window = ''
+
 def AddItem(name, url):
   listitem = xbmcgui.ListItem(label          = "",
                               label2         = name
@@ -88,6 +97,7 @@ def Search():
 
   AddItem(__language__(33002), "plugin://%s/?action=browse" % (__scriptid__))
   AddItem(__language__(33004), "plugin://%s/?action=browsedual" % (__scriptid__))
+  AddItem(__language__(33008), "plugin://%s/?action=settings" % (__scriptid__))
 
 def get_params(string=""):
   param=[]
@@ -112,12 +122,25 @@ def get_params(string=""):
 
 params = get_params()
 
-def charset_detect(filename):
-    with open(filename,'rb') as fi:
-        rawdata = fi.read()
-    encoding = chardet.detect(rawdata)['encoding']
-    if encoding.lower() == 'gb2312':  # Decoding may fail using GB2312
-        encoding = 'gbk'
+def charset_detect(filename, bottom):
+    if bottom:
+      setting = 'bottom_characterset'
+    else:
+      setting = 'top_characterset'
+    encoding = __addon__.getSetting(setting)
+    if encoding == 'Auto':
+      with open(filename,'rb') as fi:
+          rawdata = fi.read()
+      encoding = chardet.detect(rawdata)['encoding']
+      if encoding.lower() == 'gb2312':  # Decoding may fail using GB2312
+          encoding = 'gbk'
+
+      #encoding='iso-8859-9'
+      #encoding='windows-1254'
+    else:
+      choices = {'Arabic (ISO)': 'iso-8859-6', 'Arabic (Windows)': 'windows-1256', 'Baltic (ISO)': 'iso-8859-13', 'Baltic (Windows)': 'windows-1257', 'Central Europe (ISO)': 'iso-8859-2', 'Central Europe (Windows)': 'windows-1250', 'Chinese Simplified': 'gb2312', 'Chinese Traditional (Big5)': 'cp950', 'Cyrillic (ISO)': 'iso-8859-5', 'Cyrillic (Windows)': 'windows-1251', 'Greek (ISO)': 'iso-8859-7', 'Greek (Windows)': 'windows-1253', 'Hebrew (ISO)': 'iso-8859-8', 'Hebrew (Windows)': 'windows-1255', 'Hong Kong (Big5-HKSCS)': 'big5-hkscs', 'Japanese (Shift-JIS)': 'csshiftjis', 'Korean': 'iso2022_kr', 'Nordic Languages (ISO)': 'iso-8859-10', 'South Europe (ISO)': 'ISO-8859-3', 'Thai (ISO)': 'iso-8859-11', 'Thai (Windows)': 'cp874', 'Turkish (ISO)': 'iso-8859-9', 'Turkish (Windows)': 'windows-1254', 'Vietnamese (Windows)': 'windows-1258', 'Western Europe (ISO)': 'iso-8859-15', 'Western Europe (Windows)': 'windows-1252'}
+      encoding = choices.get(encoding, 'default')
+
     return encoding
 
 def setminTime(minTime, prevIndex, subs, line1):
@@ -134,8 +157,17 @@ def setminTime(minTime, prevIndex, subs, line1):
 def merge(file):
     subs=[]
     subs.append(pysubs2.SSAFile.from_string('', 'srt'))
+    bottom = not __addon__.getSetting('dualsub_swap') == 'true'
     for sub in file:
-      subs.append(pysubs2.load(sub, encoding=charset_detect(sub)))
+      try:
+        result = pysubs2.load(sub, encoding=charset_detect(sub, bottom))
+      except Exception as e:
+        __msg_box__.ok(__language__(32031), str(e))
+        raise e
+
+      subs.append(result)
+
+      bottom = not bottom
     ass = os.path.join(__temp__, "%s.ass" %(str(uuid.uuid4())))
 
     if not p2:
@@ -207,6 +239,8 @@ def merge(file):
         line1 = subs[1][i]
         line1.style = u'bottom-style'
         prevIndexBottom = setminTime(minTime, prevIndexBottom, subs, line1)
+        #line1.text=unicode(line1.text, 'windows-1254')
+        #line1.text=unicode('tarara', 'windows-1254')
         subs[0].append(line1)
 
       if timeThresh < 0:
@@ -291,7 +325,7 @@ elif params['action'] == 'browse':
     exts = exts + '|' + ext
   exts = exts[1:]
   while True:
-    subtitlefile = xbmcgui.Dialog().browse(1, __language__(33003), "video", ".zip|" + exts, False, False, __subtitlepath__, False)
+    subtitlefile = __msg_box__.browse(1, __language__(33003), "video", ".zip|" + exts, False, False, __subtitlepath__, False)
     if subtitlefile != __subtitlepath__:
       if subtitlefile.endswith('.zip'):
         subtitlefile = unzip(subtitlefile, __exts__)
@@ -307,7 +341,7 @@ elif params['action'] == 'browsedual':
       title = __language__(33006)
     else:
       title = __language__(33005)
-    subtitlefile1 = xbmcgui.Dialog().browse(1, title, "video", ".zip|.srt", False, False, __subtitlepath__, False)
+    subtitlefile1 = __msg_box__.browse(1, title, "video", ".zip|.srt", False, False, __subtitlepath__, False)
     if subtitlefile1 != __subtitlepath__:
       if subtitlefile1.endswith('.zip'):
         subtitlefile1 = unzip(subtitlefile1, [ ".srt" ])
@@ -323,7 +357,8 @@ elif params['action'] == 'browsedual':
         title = __language__(33005)
       else:
         title = __language__(33006)
-      subtitlefile2 = xbmcgui.Dialog().browse(1, title, "video", ".zip|.srt", False, False, __subtitlepath__, False)
+      title = title + ' ' + __language__(33009)
+      subtitlefile2 = __msg_box__.browse(1, title, "video", ".zip|.srt", False, False, __subtitlepath__, False)
       if subtitlefile2 == __subtitlepath__:
         break
       else:
@@ -335,5 +370,8 @@ elif params['action'] == 'browsedual':
 
     finalfile = merge(subs)
     Download(finalfile)
+
+elif params['action'] == 'settings':
+  __addon__.openSettings()
 
 xbmcplugin.endOfDirectory(int(sys.argv[1]))
