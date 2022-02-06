@@ -14,7 +14,7 @@
         <setting label="32022" type="text" enable="false"/>
     	<setting label="32006" type="lsep"/>
     	<setting default="Arial" subsetting="true" label="32007" id="top_font" type="labelenum" values="Arial|Verdana"/>
-        <setting default="Auto" subsetting="true" label="32030" id="top_characterset" type="select" values="Auto|Arabic (ISO)|Arabic (Windows)|Baltic (ISO)|Baltic (Windows)|Central Europe (ISO)|Central Europe (Windows)|Chinese Simplified (ISO)|Chinese Traditional (Big5)|Cyrillic (ISO)|Cyrillic (Windows)|Greek (ISO)|Greek (Windows)|Hebrew (ISO)|Hebrew (Windows)|Hong Kong (Big5-HKSCS)|Japanese (Shift-JIS)|Korean|South Europe (ISO)|Thai (Windows)|Turkish (ISO)|Turkish (Windows)|Vietnamese (Windows)|Western Europe (ISO)|Western Europe (Windows)"/>
+        <setting default="Auto" subsetting="true" label="32030" id="top_characterset" type="select"    values="Auto|Arabic (ISO)|Arabic (Windows)|Baltic (ISO)|Baltic (Windows)|Central Europe (ISO)|Central Europe (Windows)|Chinese Simplified (ISO)|Chinese Traditional (Big5)|Cyrillic (ISO)|Cyrillic (Windows)|Greek (ISO)|Greek (Windows)|Hebrew (ISO)|Hebrew (Windows)|Hong Kong (Big5-HKSCS)|Japanese (Shift-JIS)|Korean|Nordic Languages (ISO)|South Europe (ISO)|Thai (Windows)|Turkish (ISO)|Turkish (Windows)|Vietnamese (Windows)|UTF8|UTF16|UTF32|Western Europe (ISO)|Western Europe (Windows)"/>
         <setting default="17" subsetting="true" label="32008" type="slider" id="top_fontsize" range="12,1,30" option="int" />
     	<setting default="true" subsetting="true" label="32009" id="top_bold" type="bool" />
     	<setting default="32013" subsetting="true" label="32010"  id="top_color" type="labelenum" lvalues="32012|32013" />
@@ -23,7 +23,7 @@
     	<setting default="1" subsetting="true" label="32024" type="slider" id="top_outline" range="0,1,5" option="int" />
     	<setting label="32016" type="lsep"/>
     	<setting default="Arial" subsetting="true" label="32007" id="bottom_font" type="labelenum" values="Arial|Verdana"/>
-        <setting default="Auto" subsetting="true" label="32030" id="bottom_characterset" type="select" values="Auto|Arabic (ISO)|Arabic (Windows)|Baltic (ISO)|Baltic (Windows)|Central Europe (ISO)|Central Europe (Windows)|Chinese Simplified (ISO)|Chinese Traditional (Big5)|Cyrillic (ISO)|Cyrillic (Windows)|Greek (ISO)|Greek (Windows)|Hebrew (ISO)|Hebrew (Windows)|Hong Kong (Big5-HKSCS)|Japanese (Shift-JIS)|Korean|Nordic Languages (ISO)|South Europe (ISO)|Thai (Windows)|Turkish (ISO)|Turkish (Windows)|Vietnamese (Windows)|Western Europe (ISO)|Western Europe (Windows)"/>
+        <setting default="Auto" subsetting="true" label="32030" id="bottom_characterset" type="select" values="Auto|Arabic (ISO)|Arabic (Windows)|Baltic (ISO)|Baltic (Windows)|Central Europe (ISO)|Central Europe (Windows)|Chinese Simplified (ISO)|Chinese Traditional (Big5)|Cyrillic (ISO)|Cyrillic (Windows)|Greek (ISO)|Greek (Windows)|Hebrew (ISO)|Hebrew (Windows)|Hong Kong (Big5-HKSCS)|Japanese (Shift-JIS)|Korean|Nordic Languages (ISO)|South Europe (ISO)|Thai (Windows)|Turkish (ISO)|Turkish (Windows)|Vietnamese (Windows)|UTF8|UTF16|UTF32|Western Europe (ISO)|Western Europe (Windows)"/>
     	<setting default="17" subsetting="true" label="32008" type="slider" id="bottom_fontsize" range="12,1,30" option="int" />
     	<setting default="true" subsetting="true" label="32009" id="bottom_bold" type="bool" />
     	<setting default="32012" subsetting="true" label="32010" id="bottom_color" type="labelenum" lvalues="32012|32013" />
