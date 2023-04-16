@@ -12,16 +12,19 @@ import uuid
 import json
 import chardet
 
-try:
-  import pysubs2
-except:
-  from lib import pysubs2
-
 if sys.version_info[0] == 2:
     p2 = True
 else:
     unicode = str
     p2 = False
+
+try:
+  import pysubs2
+except:
+  from lib import pysubs2
+
+if not p2:
+  from resources.lib.charset_normalizer.api import from_path
 
 __addon__ = xbmcaddon.Addon()
 __author__     = __addon__.getAddonInfo('author')
@@ -129,6 +132,16 @@ def charset_detect(filename, bottom):
       setting = 'top_characterset'
     encoding = __addon__.getSetting(setting)
     if encoding == 'Auto':
+      encoding = 'Auto Chardet'
+    if encoding == 'Auto Charset_normalizer':
+      if p2:
+        raise RuntimeError(__language__(32032))
+      else:
+        # see https://github.com/Ousret/charset_normalizer
+        results = from_path(filename)
+        result = results.best()
+        encoding = result.encoding
+    elif encoding == 'Auto Chardet':
       with open(filename,'rb') as fi:
           rawdata = fi.read()
       # see https://chardet.readthedocs.io/en/latest/supported-encodings.html

@@ -106,3 +106,6 @@ msgid "Character set"
 
 msgctxt "#32031"
 msgid "Error loading subtitle file"
+
+msgctxt "#32032"
+msgid "Charset_normalizer not supported by Python 2 (kodi 18 or lower)"
