@@ -109,3 +109,6 @@ msgid "Error loading subtitle file"
 
 msgctxt "#32032"
 msgid "Charset_normalizer not supported by Python 2 (kodi 18 or lower)"
+
+msgctxt "#32033"
+msgid "An error that a subtitle cannot be downloaded will popup after closing this message. Please ignore this since there is no work around for it to not display it."

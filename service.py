@@ -385,5 +385,6 @@ elif params['action'] == 'browsedual':
 
 elif params['action'] == 'settings':
   __addon__.openSettings()
+  __msg_box__.ok('LocalSubtitle', __language__(32033))
 
 xbmcplugin.endOfDirectory(int(sys.argv[1]))
