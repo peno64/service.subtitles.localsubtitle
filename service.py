@@ -167,9 +167,14 @@ def setminTime(minTime, prevIndex, subs, line1):
     return len(subs[0])
 
 def merge(file):
+    bottom_top = (__addon__.getSetting('subtitle_locations') == __language__(32017)) # 'Bottom-Top'
+    bottom_bottom = (__addon__.getSetting('subtitle_locations') == __language__(32019)) # 'Bottom-Bottom'
+    left_right = (__addon__.getSetting('subtitle_locations') == __language__(32018)) # 'Bottom, Left-Right'
+
     subs=[]
     subs.append(pysubs2.SSAFile.from_string('', 'srt'))
     bottom = not __addon__.getSetting('dualsub_swap') == 'true'
+
     for sub in file:
       try:
         result = pysubs2.load(sub, encoding=charset_detect(sub, bottom))
@@ -189,14 +194,20 @@ def merge(file):
 
     top_style = pysubs2.SSAStyle()
     bottom_style=top_style.copy()
-    top_style.alignment = 8
+    if bottom_top:
+      top_style.alignment = 8
+    else:
+      top_style.alignment = 2
+    if left_right:
+      top_style.marginl = 200
+      bottom_style.marginr = 200
     top_style.fontsize = int(__addon__.getSetting('top_fontsize'))
     if(__addon__.getSetting('top_bold') == 'true'):
       top_style.bold = 1
     top_style.fontname = myunicode(__addon__.getSetting('top_font'))
-    if (__addon__.getSetting('top_color') == 'Yellow'):
+    if (__addon__.getSetting('top_color') == __language__(32013)): # 'Yellow'
       top_style.primarycolor = pysubs2.Color(255, 255, 0, 0)
-    elif (__addon__.getSetting('top_color') == 'White'):
+    elif (__addon__.getSetting('top_color') == __language__(32012)): # 'White'
       top_style.primarycolor = pysubs2.Color(255, 255, 255, 0)
       top_style.secondarycolor = pysubs2.Color(255,255,255,0)
     if (__addon__.getSetting('top_background') == 'true'):
@@ -205,15 +216,18 @@ def merge(file):
       top_style.borderstyle = 4
     top_style.shadow = int(__addon__.getSetting('top_shadow'))
     top_style.outline = int(__addon__.getSetting('top_outline'))
+    top_style.marginv= int(__addon__.getSetting('top_verticalmargin'))
+    if bottom_bottom:
+      top_style.marginv = top_style.marginv + 40
 
     bottom_style.alignment = 2
     bottom_style.fontsize= int(__addon__.getSetting('bottom_fontsize'))
     if (__addon__.getSetting('bottom_bold') =='true'):
       bottom_style.bold = 1
     bottom_style.fontname = myunicode(__addon__.getSetting('bottom_font'))
-    if (__addon__.getSetting('bottom_color') == 'Yellow'):
+    if (__addon__.getSetting('bottom_color') == __language__(32013)): # 'Yellow'
       bottom_style.primarycolor=pysubs2.Color(255, 255, 0, 0)
-    elif (__addon__.getSetting('bottom_color') == 'White'):
+    elif (__addon__.getSetting('bottom_color') == __language__(32012)): # 'White'
       bottom_style.primarycolor=pysubs2.Color(255, 255, 255, 0)
     if (__addon__.getSetting('bottom_background') == 'true'):
       bottom_style.backcolor=pysubs2.Color(0,0,0,128)
@@ -221,6 +235,7 @@ def merge(file):
       bottom_style.borderstyle=4
     bottom_style.shadow = int(__addon__.getSetting('bottom_shadow'))
     bottom_style.outline = int(__addon__.getSetting('bottom_outline'))
+    bottom_style.marginv= int(__addon__.getSetting('bottom_verticalmargin'))
 
     if __addon__.getSetting('dualsub_swap') == 'true':
       subs[0].styles['top-style'] = bottom_style
@@ -251,8 +266,6 @@ def merge(file):
         line1 = subs[1][i]
         line1.style = u'bottom-style'
         prevIndexBottom = setminTime(minTime, prevIndexBottom, subs, line1)
-        #line1.text=unicode(line1.text, 'windows-1254')
-        #line1.text=unicode('tarara', 'windows-1254')
         subs[0].append(line1)
 
       if timeThresh < 0:

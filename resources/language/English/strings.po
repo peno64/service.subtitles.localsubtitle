@@ -27,10 +27,10 @@ msgctxt "#33004"
 msgid "Browse Dual Subtitles..."
 
 msgctxt "#33005"
-msgid "Choose Bottom Subtitle File"
+msgid "Choose First Subtitle File"
 
 msgctxt "#33006"
-msgid "Choose Top Subtitle File"
+msgid "Choose Second Subtitle File"
 
 msgctxt "#33007"
 msgid "Zip file does not contain a supported subtitle file"
@@ -45,7 +45,7 @@ msgctxt "#32005"
 msgid "Dual Subtitles Styles"
 
 msgctxt "#32006"
-msgid "Top Subtitle"
+msgid "Top/Right Subtitle"
 
 msgctxt "#32007"
 msgid "Font"
@@ -68,8 +68,23 @@ msgid "White"
 msgctxt "#32013"
 msgid "Yellow"
 
+msgctxt "#32014"
+msgid "Subtitle locations"
+
+msgctxt "#32015"
+msgid "Vertical Margin"
+
 msgctxt "#32016"
-msgid "Bottom Subtitle"
+msgid "Bottom/Left Subtitle"
+
+msgctxt "#32017"
+msgid "Bottom-Top"
+
+msgctxt "#32018"
+msgid "Bottom, Left-Right"
+
+msgctxt "#32019"
+msgid "Bottom-Bottom"
 
 msgctxt "#32020"
 msgid "Auto Shift"
@@ -99,7 +114,7 @@ msgctxt "#32028"
 msgid "However if a next subtitle occurs earlier this time is of course cut off.\nThis allows people that read slower to read the text."
 
 msgctxt "#32029"
-msgid "Swap Bottom - Top subtitles"
+msgid "Swap Bottom/Left - Top/Right subtitles"
 
 msgctxt "#32030"
 msgid "Character set"
@@ -111,4 +126,4 @@ msgctxt "#32032"
 msgid "Charset_normalizer not supported by Python 2 (kodi 18 or lower)"
 
 msgctxt "#32033"
-msgid "An error that a subtitle cannot be downloaded will popup after closing this message. Please ignore this since there is no work around for it to not display it."
+msgid "An error that a subtitle cannot be downloaded can popup after closing this message. Please ignore this since there is no work around for it to not display it."
