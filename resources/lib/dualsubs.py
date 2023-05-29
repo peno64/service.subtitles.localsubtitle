@@ -93,8 +93,14 @@ def mergesubs(file):
     top_style.outline = int(__addon__.getSetting('top_outline'))
     top_style.marginv= int(__addon__.getSetting('top_verticalmargin'))
     if bottom_bottom:
-      top_style.marginv = top_style.marginv + 40
-
+      delta = int(__addon__.getSetting('top_fontsize'))
+      if int(__addon__.getSetting('bottom_fontsize')) > delta:
+        delta = int(__addon__.getSetting('bottom_fontsize'))
+      if delta <= 17:
+        delta = 0
+      else:
+        delta = (delta - 17) * 2
+      top_style.marginv = top_style.marginv + 40 + delta
     bottom_style.alignment = 2
     bottom_style.fontsize= int(__addon__.getSetting('bottom_fontsize'))
     if (__addon__.getSetting('bottom_bold') =='true'):
