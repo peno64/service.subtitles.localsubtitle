@@ -36,15 +36,24 @@ if p2:
 
 __msg_box__    = xbmcgui.Dialog()
 
+def __equalText(t1, t2):
+    if t1 == str(t2):
+      return True
+
+    if t1 == __language__(t2):
+      return True
+
+    return False
+
 def mergesubs(file):
     if len(file) < 2:
       bottom_top = True
       bottom_bottom = False
       left_right = False
     else:
-      bottom_top = (__addon__.getSetting('subtitle_locations') == __language__(32507)) # 'Bottom-Top'
-      bottom_bottom = (__addon__.getSetting('subtitle_locations') == __language__(32509)) # 'Bottom-Bottom'
-      left_right = (__addon__.getSetting('subtitle_locations') == __language__(32508)) # 'Bottom, Left-Right'
+      bottom_top = (__equalText(__addon__.getSetting('subtitle_locations'), 32507)) # 'Bottom-Top'
+      bottom_bottom = (__equalText(__addon__.getSetting('subtitle_locations'), 32509)) # 'Bottom-Bottom'
+      left_right = (__equalText(__addon__.getSetting('subtitle_locations'), 32508)) # 'Bottom, Left-Right'
 
     subs=[]
     subs.append(pysubs2.SSAFile.from_string('', 'srt'))
@@ -80,9 +89,9 @@ def mergesubs(file):
     if(__addon__.getSetting('top_bold') == 'true'):
       top_style.bold = 1
     top_style.fontname = myunicode(__addon__.getSetting('top_font'))
-    if (__addon__.getSetting('top_color') == __language__(32533)): # 'Yellow'
+    if (__equalText(__addon__.getSetting('top_color'), 32533)): # 'Yellow'
       top_style.primarycolor = pysubs2.Color(255, 255, 0, 0)
-    elif (__addon__.getSetting('top_color') == __language__(32532)): # 'White'
+    elif (__equalText(__addon__.getSetting('top_color'), 32532)): # 'White'
       top_style.primarycolor = pysubs2.Color(255, 255, 255, 0)
       top_style.secondarycolor = pysubs2.Color(255,255,255,0)
     if (__addon__.getSetting('top_background') == 'true'):
@@ -106,9 +115,9 @@ def mergesubs(file):
     if (__addon__.getSetting('bottom_bold') =='true'):
       bottom_style.bold = 1
     bottom_style.fontname = myunicode(__addon__.getSetting('bottom_font'))
-    if (__addon__.getSetting('bottom_color') == __language__(32533)): # 'Yellow'
+    if (__equalText(__addon__.getSetting('bottom_color'), 32533)): # 'Yellow'
       bottom_style.primarycolor=pysubs2.Color(255, 255, 0, 0)
-    elif (__addon__.getSetting('bottom_color') == __language__(32532)): # 'White'
+    elif (__equalText(__addon__.getSetting('bottom_color'), 32532)): # 'White'
       bottom_style.primarycolor=pysubs2.Color(255, 255, 255, 0)
     if (__addon__.getSetting('bottom_background') == 'true'):
       bottom_style.backcolor=pysubs2.Color(0,0,0,128)

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addon id="service.subtitles.localsubtitle"
        name="LocalSubtitle"
-       version="1.12.1"
+       version="1.12.2"
        provider-name="peno">
   <requires>
       <import addon="script.module.pysubs2" version="0.1.0"/>
@@ -38,8 +38,17 @@ As extra several extra feastures are added in this case:
 - Auto shift subtitles: to synchronize the two subtitles such that they are displayed at the same time
 - Font, character set, color, ... selection: This overrules the kodi settings</description>
     <disclaimer lang="en"></disclaimer>
+	<news>
+Improved add-on by OpenSubtitles.org
+v1.12.2 (2023-12-02)
+- Some default settings were not applied if not changed first
+v1.12.1 (2021-12-15)
+- More font options (shadow, outline)
+- Possibility to swap bottom - top subtitles
+- Auto shift option. When enabled, the second subtitle will be synced with the first if start/end is within the time difference threshold.
+	</news>
     <platform>all</platform>
     <license>GNU GENERAL PUBLIC LICENSE. Version 2, June 1991</license>
-    <source></source>
+    <source>https://github.com/peno64/service.subtitles.localsubtitle</source>
   </extension>
 </addon>
