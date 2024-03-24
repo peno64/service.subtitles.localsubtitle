@@ -197,7 +197,22 @@ elif params['action'] == 'browsedual':
           subs.append(subtitlefile2)
           break
 
-    finalfile = mergesubs(subs)
+    substemp=[]
+    for sub in subs:
+      # Python seems not to be able to access files on special kodi locations like smb: (samba)
+      # See https://forum.kodi.tv/showthread.php?tid=372745
+      # To work-around that, the kodi copy function from xbmcvfs is used to copy the file from the specified location to the temp folder which is on the local OS and thus accessible by Python
+      # See https://romanvm.github.io/Kodistubs/_autosummary/xbmcvfs.html
+      subtemp = os.path.join(__temp__, "%s" %(str(uuid.uuid4())))
+      xbmcvfs.copy(sub, subtemp)
+      substemp.append(subtemp)
+
+    finalfile = mergesubs(substemp)
+
+    # And now the temp files are removed again
+    for subtemp in substemp:
+      xbmcvfs.delete(subtemp)
+
     Download(finalfile)
 
 elif params['action'] == 'settings':
