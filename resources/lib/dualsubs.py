@@ -6,6 +6,7 @@ import xbmcgui
 import os
 import chardet
 import uuid
+from json import loads, dumps
 
 try:
     translatePath = xbmcvfs.translatePath
@@ -88,7 +89,7 @@ def mergesubs(file):
     top_style.fontsize = int(__addon__.getSetting('top_fontsize'))
     if(__addon__.getSetting('top_bold') == 'true'):
       top_style.bold = 1
-    top_style.fontname = myunicode(__addon__.getSetting('top_font'))
+    top_style.fontname = __fontname(myunicode(__addon__.getSetting('top_font')))
     if (__equalText(__addon__.getSetting('top_color'), 32533)): # 'Yellow'
       top_style.primarycolor = pysubs2.Color(255, 255, 0, 0)
     elif (__equalText(__addon__.getSetting('top_color'), 32532)): # 'White'
@@ -114,7 +115,7 @@ def mergesubs(file):
     bottom_style.fontsize= int(__addon__.getSetting('bottom_fontsize'))
     if (__addon__.getSetting('bottom_bold') =='true'):
       bottom_style.bold = 1
-    bottom_style.fontname = myunicode(__addon__.getSetting('bottom_font'))
+    bottom_style.fontname = __fontname(myunicode(__addon__.getSetting('bottom_font')))
     if (__equalText(__addon__.getSetting('bottom_color'), 32533)): # 'Yellow'
       bottom_style.primarycolor=pysubs2.Color(255, 255, 0, 0)
     elif (__equalText(__addon__.getSetting('bottom_color'), 32532)): # 'White'
@@ -204,6 +205,48 @@ def mergesubs(file):
 
     subs[0].save(ass,format_='ass')
     return ass
+
+def __fontname(name):
+    if name == '<Kodi Subtitles Font>':
+      if p2:
+        command = {
+            'jsonrpc': '2.0',
+            'id': 1,
+            'method': 'Settings.GetSettingValue',
+            'params': {
+                'setting': 'subtitles.font'
+            }
+        }
+      else:
+        command = {
+            'jsonrpc': '2.0',
+            'id': 1,
+            'method': 'Settings.GetSettingValue',
+            'params': {
+                'setting': 'subtitles.fontname'
+            }
+        }
+
+      name = ''
+      try:
+        result = xbmc.executeJSONRPC(dumps(command))
+        result = loads(result)
+        if 'result' in result:
+          result = result['result']
+          if 'value' in result:
+            name = result['value']
+      except:
+        name = ''
+
+      if name.upper() == 'DEFAULT':
+        __msg_box__.ok('', __language__(32535))
+        raise RuntimeError(__language__(32535))
+
+      if name == '':
+        __msg_box__.ok('', __language__(32536))
+        raise RuntimeError(__language__(32536))
+
+    return name
 
 def __charset_detect(filename, bottom):
     if bottom:

@@ -128,3 +128,9 @@ msgid "Yellow"
 
 msgctxt "#32534"
 msgid "Charset_normalizer not supported by Python 2 (kodi 18 or lower)"
+
+msgctxt "#32535"
+msgid "In Kodi Settings, Player, Subtitles, Font, the default font is selected which cannot be used. Please choose a specific font there or in this addon settings."
+
+msgctxt "#32536"
+msgid "Unable to retrieve the subtitles font from Kodi Settings, Player, Subtitles, Font."
