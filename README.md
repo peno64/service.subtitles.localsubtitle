@@ -17,9 +17,11 @@ The following subtitle extensions are allowed: .srt, .sub, .ssa, .ass, .idx, .sm
 However if dual subtitles are chosen then only .srt subtitle files are allowed.
 Since version 1.7.0 also a zip file with a subtitle is allowed. Both for single and dual subtitles.
 
+The difference between with Kodi Settings and with Addon settings is that with Kodi settings the settings from Kodi settings are used: (Settings, Player, Language, Subtitles) (Font, size, ...)
+With Addon Settings the settings defined in the Addon are used
 The difference between single subtitle and dual subtitle is the following.
-When Single Subtitle is chosen then only one subtitle can be chosen and when done it is used as is with the kodi setting (Settings, Player, Language, Subtitles) (Font, size, ...)
-When Dual Subtitle is chosen then it is possible to select 2 subtitle files. The first selected file will be shown at the bottom, the second one on top (can be swapped).
+When Dual Subtitle is chosen then it is possible to select 2 subtitle files.
+There are 3 ways to show the two subtitles. Bottom, top or above each other at the bottom or next to each other at the bottom.
 As such subtitles of two languages can be displayed at the same time. But it is also possible to only select one subtitle. This to also have the advantages of dual function functionality.
 As extra several extra feastures are added in this case:
 - Minimal time subtitles on screen: For the slow readers

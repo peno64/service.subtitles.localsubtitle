@@ -93,6 +93,7 @@ def Search():
       AddItem(__subtitle__, "plugin://%s/?action=download" % (__scriptid__))
 
   AddItem(__language__(33002), "plugin://%s/?action=browse" % (__scriptid__))
+  AddItem(__language__(33011), "plugin://%s/?action=browsesingle" % (__scriptid__))
   AddItem(__language__(33004), "plugin://%s/?action=browsedual" % (__scriptid__))
   AddItem(__language__(33008), "plugin://%s/?action=settings" % (__scriptid__))
 
@@ -164,9 +165,11 @@ elif params['action'] == 'browse':
   if subtitlefile != __subtitlepath__:
     Download(subtitlefile)
 
-elif params['action'] == 'browsedual':
+elif params['action'] == 'browsesingle' or params['action'] == 'browsedual':
   while True:
-    if __addon__.getSetting('dualsub_swap') == 'true':
+    if params['action'] == 'browsesingle':
+      title = __language__(33003)
+    elif __addon__.getSetting('dualsub_swap') == 'true':
       title = __language__(33006)
     else:
       title = __language__(33005)
@@ -181,21 +184,22 @@ elif params['action'] == 'browsedual':
     subs=[]
     subs.append(subtitlefile1)
 
-    while True:
-      if __addon__.getSetting('dualsub_swap') == 'true':
-        title = __language__(33005)
-      else:
-        title = __language__(33006)
-      title = title + ' ' + __language__(33009)
-      subtitlefile2 = __msg_box__.browse(1, title, "video", ".zip|.srt", False, False, __subtitlepath__, False)
-      if subtitlefile2 == __subtitlepath__:
-        break
-      else:
-        if subtitlefile2.endswith('.zip'):
-          subtitlefile2 = unzip(subtitlefile2, [ ".srt" ])
-        if subtitlefile2 != None:
-          subs.append(subtitlefile2)
+    if params['action'] != 'browsesingle':
+      while True:
+        if __addon__.getSetting('dualsub_swap') == 'true':
+          title = __language__(33005)
+        else:
+          title = __language__(33006)
+        title = title + ' ' + __language__(33009)
+        subtitlefile2 = __msg_box__.browse(1, title, "video", ".zip|.srt", False, False, __subtitlepath__, False)
+        if subtitlefile2 == __subtitlepath__:
           break
+        else:
+          if subtitlefile2.endswith('.zip'):
+            subtitlefile2 = unzip(subtitlefile2, [ ".srt" ])
+          if subtitlefile2 != None:
+            subs.append(subtitlefile2)
+            break
 
     substemp=[]
     for sub in subs:

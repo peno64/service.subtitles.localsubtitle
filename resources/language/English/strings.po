@@ -15,16 +15,16 @@ msgstr ""
 #English
 
 msgctxt "#33001"
-msgid "Manual search not supported"
+msgid "Manual Search Not Supported"
 
 msgctxt "#33002"
-msgid "Browse Single Subtitle..."
+msgid "Single Subtitle with Kodi Settings..."
 
 msgctxt "#33003"
 msgid "Choose Subtitle File"
 
 msgctxt "#33004"
-msgid "Browse Dual Subtitles..."
+msgid "Dual Subtitles with Addon Settings..."
 
 msgctxt "#33005"
 msgid "Choose First Subtitle File"
@@ -33,17 +33,19 @@ msgctxt "#33006"
 msgid "Choose Second Subtitle File"
 
 msgctxt "#33007"
-msgid "Zip file does not contain a supported subtitle file"
+msgid "Zip File Does Not Contain a Supported Subtitle File"
 
 msgctxt "#33008"
 msgid "Addon Settings..."
 
 msgctxt "#33009"
-msgid "(Press Cancel for no subtitle)"
+msgid "(Press Cancel for No second Subtitle)"
 
 msgctxt "#33010"
-msgid "These options only apply if Browse Dual Subtitles is chosen.\nNot for a single subtitle in which case standard Kodi settings are used."
+msgid "These Options Only Apply if Subtitle(s) ...with Addon Settings... Is Chosen.\nNot for ...with Kodi Settings..."
 
+msgctxt "#33011"
+msgid "Single Subtitle with Addon Settings..."
 
 msgctxt "#32507"
 msgid "Bottom-Top"
@@ -76,7 +78,7 @@ msgctxt "#32516"
 msgid "Black Translucent Background"
 
 msgctxt "#32517"
-msgid "Subtitle locations"
+msgid "Subtitle Locations"
 
 msgctxt "#32518"
 msgid "Vertical Margin"
@@ -91,34 +93,34 @@ msgctxt "#32521"
 msgid "Time Difference Threshold (milliseconds)"
 
 msgctxt "#32522"
-msgid "Enabling Auto Shift will try to sync the second subtitle with the first\naccording to the Time Difference Threshold"
+msgid "Enabling Auto Shift Will Try to Sync the Second Subtitle With the First\nAccording to the Time Difference Threshold"
 
 msgctxt "#32523"
-msgid "The depth of the text shadow, in pixels"
+msgid "The Depth of the Text Shadow, in Pixels"
 
 msgctxt "#32524"
-msgid "The width of the text outline, in pixels"
+msgid "The Width of the Text Outline, in Pixels"
 
 msgctxt "#32525"
-msgid "Swap Bottom/Left - Top/Right subtitles"
+msgid "Swap Bottom/Left - Top/Right Subtitles"
 
 msgctxt "#32526"
-msgid "Minimal Time (milliseconds) Subtitles On Screen"
+msgid "Minimal Time (milliseconds) Subtitles on Screen"
 
 msgctxt "#32527"
-msgid "When this time is set, all subtitles are extended to stay on screen\nfor at least this time."
+msgid "When This Time Is Set, All Subtitles Are Extended to Stay on Screen\nfor at Least This Time."
 
 msgctxt "#32528"
-msgid "However if a next subtitle occurs earlier this time is of course cut off.\nThis allows people that read slower to read the text."
+msgid "However, If a Next Subtitle Occurs Earlier, This Time Is of Course Cut Off.\nThis Allows People That Read Slower to Read the Text."
 
 msgctxt "#32529"
-msgid "Character set"
+msgid "Character Set"
 
 msgctxt "#32530"
-msgid "An error that a subtitle cannot be downloaded can popup after closing this message. Please ignore this since there is no work around for it to not display it."
+msgid "An Error That a Subtitle Cannot Be Downloaded Can Popup After Closing This Message. Please Ignore This Since There Is No Workaround for It Not to Display This Message."
 
 msgctxt "#32531"
-msgid "Error loading subtitle file"
+msgid "Error Loading Subtitle File"
 
 msgctxt "#32532"
 msgid "White"
@@ -127,10 +129,10 @@ msgctxt "#32533"
 msgid "Yellow"
 
 msgctxt "#32534"
-msgid "Charset_normalizer not supported by Python 2 (kodi 18 or lower)"
+msgid "Charset Normalizer Not Supported by Python 2 (Kodi 18 or Lower)"
 
 msgctxt "#32535"
-msgid "In Kodi Settings, Player, Subtitles, Font, the default font is selected which cannot be used. Please choose a specific font there or in this addon settings."
+msgid "In Kodi Settings, Player, Subtitles, Font, the Default Font Is Selected Which Cannot Be Used. Please Choose a Specific Font There or in This Addon Settings."
 
 msgctxt "#32536"
-msgid "Unable to retrieve the subtitles font from Kodi Settings, Player, Subtitles, Font."
+msgid "Unable to Retrieve the Subtitles Font from Kodi Settings, Player, Subtitles, Font."
